@@ -35,17 +35,18 @@
 
         <div class="table-responsive">
             <table class="table table-hover" border="3">
-                <col width="15%">
-                <col width="15%">
+                <col width="10%">
+                <col width="10%">
                 <col width="20%">
                 <col width="20%">
+                <col width="10%">
                 <col width="10%">
                 <col width="10%">
                 <col width="10%">
 
                 <thead>
                 <tr>
-                    <th colspan="7"><h3 align="center">Here are all the waiters.</h3></th>
+                    <th colspan="8"><h3 align="center">Here are all the waiters.</h3></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -55,6 +56,7 @@
                     <td><label>Waiter salary</label></td>
                     <td><label>Waiter time created</label></td>
                     <td><label>Waiter time changed</label></td>
+                    <td><label>Restaurant</label></td>
                     <td><label>Detail</label></td>
                     <td><label>Edit</label></td>
                     <td><label>Delete</label></td>
@@ -65,6 +67,7 @@
                         <td>{{ waiter.salary }}</td>
                         <td>{{ waiter.time_created }}</td>
                         <td>{{ waiter.time_changed }}</td>
+                        <td>{{ waiter.restaurant }}</td>
                         <td><a href="">
                             <button>Detail</button>
                         </a></td>

@@ -18,7 +18,7 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=100)
     place = models.OneToOneField(Place,
                                  on_delete=models.CASCADE,
-                                 primary_key=True)
+                                 )
 
     serves_hot_dogs = models.BooleanField(default=True)
     serves_pizzas = models.BooleanField(default=True)
@@ -28,7 +28,7 @@ class Restaurant(models.Model):
     def __unicode__(self):
         return self.name
 
-# one waiter can work on many different restaurants
+# One restaurant can have many waiters.
 class Waiter(models.Model):
     name = models.CharField(max_length=100)
     salary = models.FloatField()

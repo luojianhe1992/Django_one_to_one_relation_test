@@ -13,6 +13,11 @@ class WaiterModelForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(WaiterModelForm, self).clean()
 
+        print("%" * 30)
+        print(cleaned_data)
+        print("%" * 30)
+
+
         return cleaned_data
 
     def clean_name(self):
@@ -34,8 +39,9 @@ class WaiterModelForm(forms.ModelForm):
     def clean_restaurant(self):
         restaurant = self.cleaned_data.get('restaurant')
 
-        if not restaurant:
-            raise forms.ValidationError("Please type in restaurant.")
+        print("%" * 30)
+        print(restaurant)
+        print("%" * 30)
 
         return restaurant
 

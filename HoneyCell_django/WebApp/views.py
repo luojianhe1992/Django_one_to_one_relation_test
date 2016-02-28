@@ -349,3 +349,74 @@ def show_restaurants(request):
     return render(request, 'WebApp/show_restaurants.html', context)
 
 
+
+
+@login_required
+def restaurant_detail(request, restaurant_id):
+    print("in the function of restaurant_detail.")
+
+    print(request)
+    print(restaurant_id)
+
+    context = {}
+    context['user'] = request.user
+
+    restaurant = Restaurant.objects.get(id=restaurant_id)
+    context['restaurant'] = restaurant
+
+    return render(request, 'WebApp/restaurant_detail.html', context)
+
+
+@login_required
+def add_waiter_restaurant(request, restaurant_id):
+    print("in the function add_waiter_restaurant.")
+
+    print(request)
+    print(restaurant_id)
+
+    context = {}
+    context['user'] = request.user
+
+    errors = []
+    context['errors'] = errors
+
+    restaurant = Restaurant.objects.get(id=restaurant_id)
+    context['restaurant'] = restaurant
+
+    if request.method == "GET":
+
+        print("in the GET method of add_waiter_restaurant.")
+
+        return render(request, 'WebApp/add_waiter_restaurant.html', context)
+    else:
+
+        print("in the POST method of add_waiter_restaurant.")
+
+        waiter_name = request.POST['waiter_name']
+        waiter_salary = request.POST['waiter_salary']
+
+        if not (waiter_name and waiter_salary):
+            print("There are some fields which are None.")
+            errors.append("There are some fields which are None.")
+
+            context['waiter_name'] = waiter_name
+            context['waiter_salary'] = waiter_salary
+
+            return render(request, 'WebApp/add_waiter_restaurant.html', context)
+
+        if len(Waiter.objects.filter(name=waiter_name)):
+            print("The waiter name already exist.")
+            errors.append("The waiter name already exist.")
+
+            context['waiter_name'] = waiter_name
+            context['waiter_salary'] = waiter_salary
+
+            return render(request, 'WebApp/add_waiter_restaurant.html', context)
+
+        new_waiter_instance = Waiter(name=waiter_name,
+                                     salary=waiter_salary,
+                                     restaurant=restaurant)
+        new_waiter_instance.save()
+        print("Already save new_waiter_instance.")
+
+        return HttpResponseRedirect(reverse("show_restaurants"))

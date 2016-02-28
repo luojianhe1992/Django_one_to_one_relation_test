@@ -51,5 +51,8 @@ urlpatterns = [
 
     url(r'show_restaurants/$', 'WebApp.views.show_restaurants', name='show_restaurants'),
 
+    url(r'restaurant_detail/(?P<restaurant_id>\d+)$', 'WebApp.views.restaurant_detail', name='restaurant_detail'),
+
+    url(r'add_waiter_restaurant/(?P<restaurant_id>\d+)$', 'WebApp.views.add_waiter_restaurant', name='add_waiter_restaurant'),
 
 ]

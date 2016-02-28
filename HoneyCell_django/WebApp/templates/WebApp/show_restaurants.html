@@ -39,15 +39,16 @@
                 <col width="10%">
                 <col width="10%">
                 <col width="10%">
-                <col width="15%">
-                <col width="15%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
                 <col width="10%">
                 <col width="10%">
                 <col width="10%">
 
                 <thead>
                 <tr>
-                    <th colspan="9"><h3 align="center">Here are all the restaurants.</h3></th>
+                    <th colspan="10"><h3 align="center">Here are all the restaurants.</h3></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,6 +60,7 @@
                     <td><label>Serves pizzas?</label></td>
                     <td><label>Restaurant time changed</label></td>
                     <td><label>Restaurant time changed</label></td>
+                    <td><label>Restaurant's waiters</label></td>
                     <td><label>Detail</label></td>
                     <td><label>Edit</label></td>
                     <td><label>Delete</label></td>
@@ -69,9 +71,15 @@
                         <td>{{ restaurant.place }}</td>
                         <td>{{ restaurant.serves_hot_dogs }}</td>
                         <td>{{ restaurant.serves_hot_dogs }}</td>
+
                         <td>{{ restaurant.time_created }}</td>
                         <td>{{ restaurant.time_changed }}</td>
-                        <td><a href="">
+                        <td>
+                            {% for each_waiter in restaurant.waiter_set.all %}
+                                <p>{{ each_waiter }}</p>
+                            {% endfor %}
+                        </td>
+                        <td><a href="{% url 'restaurant_detail' restaurant.id %}">
                             <button>Detail</button>
                         </a></td>
                         <td><a href="">

@@ -38,15 +38,16 @@
                 <col width="10%">
                 <col width="10%">
                 <col width="10%">
-                <col width="20%">
-                <col width="20%">
+                <col width="15%">
+                <col width="15%">
+                <col width="10%">
                 <col width="10%">
                 <col width="10%">
                 <col width="10%">
 
                 <thead>
                 <tr>
-                    <th colspan="8"><h3 align="center">Here are all the places.</h3></th>
+                    <th colspan="9"><h3 align="center">Here are all the places.</h3></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,6 +58,7 @@
                     <td><label>Place state</label></td>
                     <td><label>Place time created</label></td>
                     <td><label>Place time changed</label></td>
+                    <td><label>Place's restaurant</label></td>
                     <td><label>Detail</label></td>
                     <td><label>Edit</label></td>
                     <td><label>Delete</label></td>
@@ -68,6 +70,7 @@
                         <td>{{ place.state }}</td>
                         <td>{{ place.time_created }}</td>
                         <td>{{ place.time_changed }}</td>
+                        <td>{{ place.restaurant }}</td>
                         <td><a href="">
                             <button>Detail</button>
                         </a></td>
