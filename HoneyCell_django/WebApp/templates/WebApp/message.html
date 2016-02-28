@@ -26,6 +26,20 @@
 
 <h2 class="log"> Hello {{ user }} </h2>
 
+<hr>
+
+<h2><a href="{% url 'add_waiter' %}"><button>Add waiter</button></a> <a href="{% url 'show_waiters' %}"><button>Show all waiters</button></a></h2>
+
+<hr>
+
+<h2><a href="{% url 'add_place' %}"><button>Add place</button></a> <a href="{% url 'show_places' %}"><button>Show all place</button></a></h2>
+
+<hr>
+
+<h2><a href="{% url 'add_restaurant' %}"><button>Add restaurant</button></a> <a href="{% url 'show_restaurants' %}"><button>Show all restaurants</button></a></h2>
+
+<hr>
+
 <h3>
     Welcome to HoneyCell WebServer!
 </h3>

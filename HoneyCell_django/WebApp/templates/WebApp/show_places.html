@@ -1,0 +1,111 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "WebApp/css/bootstrap.css" %}" type="text/css">
+    <link rel="stylesheet" href="{% static "WebApp/css/result.css" %}" type="text/css">
+    <script src="{% static "WebApp/js/d3.min.js" %}"></script>
+    <script src="{% static "WebApp/js/dimple.v2.1.6.min.js" %}"></script>
+</head>
+
+<body>
+<div id="nav">
+    <div id="logo">
+        <a href="{% url 'index' %}"><img src="{% static "WebApp/img/logo.jpeg" %}" alt="logo"></a>
+    </div>
+    <ul id="navi">
+        <li class="navMenu"><a href="{% url 'honeycell' %}">HoneyCell</a></li>
+        <li class="navMenu"><a href="{% url 'upload' %}">New Task</a></li>
+        <li class="navMenu"><a href="{% url 'preprocess' %}">Preprocessing</a></li>
+        <li class="navMenu"><a href="{% url 'analytics' %}">Analytics</a></li>
+        <li class="navMenu"><a href="{% url 'visualization' %}">Visualization</a></li>
+        <li class="navMenu"><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+</div>
+
+<h2 class="log"> Hello {{ user }} </h2>
+
+<br>
+
+<div class="container">
+    <div class="row" align="center">
+
+        <h2 align="center">This is show_places page.</h2>
+
+        <div class="table-responsive">
+            <table class="table table-hover" border="3">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="20%">
+                <col width="20%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+
+                <thead>
+                <tr>
+                    <th colspan="8"><h3 align="center">Here are all the places.</h3></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td><label>Place street</label></td>
+                    <td><label>Place city</label></td>
+                    <td><label>Place state</label></td>
+                    <td><label>Place time created</label></td>
+                    <td><label>Place time changed</label></td>
+                    <td><label>Detail</label></td>
+                    <td><label>Edit</label></td>
+                    <td><label>Delete</label></td>
+                </tr>
+                {% for place in places %}
+                    <tr>
+                        <td>{{ place.street }}</td>
+                        <td>{{ place.city }}</td>
+                        <td>{{ place.state }}</td>
+                        <td>{{ place.time_created }}</td>
+                        <td>{{ place.time_changed }}</td>
+                        <td><a href="">
+                            <button>Detail</button>
+                        </a></td>
+                        <td><a href="">
+                            <button>Edit</button>
+                        </a></td>
+                        <td><a href="">
+                            <button>Delete</button>
+                        </a></td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <h2 align="center"><a href="{% url 'add_place' %}"><button>Add place</button></a></h2>
+
+        <hr>
+
+        <h2 align="center"><a href="{% url 'message' %}">Back to message page</a></h2>
+
+        <hr>
+
+    </div>
+</div>
+
+<h3>
+    Welcome to HoneyCell WebServer!
+</h3>
+<form method="get" action="{% url 'logout' %}">{% csrf_token %}
+    <p>
+        <button type="submit">Log Out</button>
+    </p>
+</form>
+
+</body>
+</html>
+
