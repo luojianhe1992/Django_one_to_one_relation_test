@@ -441,7 +441,6 @@ def place_detail(request, place_id):
     return render(request, 'WebApp/place_detail.html', context)
 
 
-
 @login_required
 def add_restaurant_place(request, place_id):
     print("in the add_restaurant_place function.")
@@ -478,7 +477,10 @@ def add_restaurant_place(request, place_id):
 
 
         restaurant_name = request.POST['restaurant_name']
+        # using get function to get the value from POST request.
         serves_hot_dogs = request.POST.get('severs_hot_dogs')
+
+        # using get function to get the value from POST request.
         serves_pizzas = request.POST.get('serves_pizzas')
 
         if serves_hot_dogs == True:
