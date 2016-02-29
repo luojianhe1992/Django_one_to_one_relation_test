@@ -420,3 +420,106 @@ def add_waiter_restaurant(request, restaurant_id):
         print("Already save new_waiter_instance.")
 
         return HttpResponseRedirect(reverse("show_restaurants"))
+
+
+
+
+
+@login_required
+def place_detail(request, place_id):
+    print("in the place_detail function.")
+
+    print(request)
+    print(place_id)
+
+    context = {}
+    context['user'] = request.user
+
+    place = Place.objects.get(id=place_id)
+    context['place'] = place
+
+    return render(request, 'WebApp/place_detail.html', context)
+
+
+
+@login_required
+def add_restaurant_place(request, place_id):
+    print("in the add_restaurant_place function.")
+
+    print(request)
+    print(place_id)
+
+    context = {}
+    context['user'] = request.user
+
+    errors = []
+    context['errors'] = errors
+
+    place = Place.objects.get(id=place_id)
+    context['place'] = place
+
+    if request.method == "GET":
+        print("in the GET method of add_restaurant_place function.")
+
+        return render(request, 'WebApp/add_restaurant_place.html', context)
+
+    else:
+        print("in the POST method of add_restaurant_place function.")
+
+
+        print(request.POST)
+
+
+
+        print("%" * 30)
+        print(request.POST.get('severs_hot_dogs'))
+        print(request.POST.get('serves_pizzas'))
+        print("%" * 30)
+
+
+        restaurant_name = request.POST['restaurant_name']
+        serves_hot_dogs = request.POST.get('severs_hot_dogs')
+        serves_pizzas = request.POST.get('serves_pizzas')
+
+        if serves_hot_dogs == True:
+            print("it works.")
+        else:
+            print("it does not work.")
+
+        serves_hot_dogs_value = python_switch(serves_hot_dogs)
+        serves_pizzas_value = python_switch(serves_pizzas)
+
+        context['restaurant_name'] = restaurant_name
+
+        if len(Restaurant.objects.filter(name=restaurant_name)):
+            errors.append("The restaurant name already exist.")
+
+            return render(request, 'WebApp/add_restaurant_place.html', context)
+
+        if serves_hot_dogs_value == None:
+            errors.append("Please choose if serves hot dogs.")
+
+            return render(request, 'WebApp/add_restaurant_place.html', context)
+
+        if serves_pizzas_value == None:
+            errors.append("Please choose if serves pizzas.")
+
+            return render(request, 'WebApp/add_restaurant_place.html', context)
+
+
+        new_restaurant_instance = Restaurant(name=restaurant_name,
+                                             serves_hot_dogs=serves_hot_dogs_value,
+                                             serves_pizzas=serves_pizzas_value,
+                                             place=place)
+        new_restaurant_instance.save()
+        print("Already save the new_restaurant_instance.")
+
+        # Pass args in the reverse function.
+        return HttpResponseRedirect(reverse('place_detail', kwargs={'place_id': place.id}))
+
+
+
+def python_switch(x):
+    return {'None': None,
+            'True': True,
+            'False': False}[x]
